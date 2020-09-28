@@ -7,13 +7,16 @@
   - name: Update 
     apt:
       update_cache: yes
+    when: ansible_distribution == "Ubuntu"
 
   - name: Install Apache2 Packadge
     apt:
       name: apache2
       state: absent
+    when: ansible_distribution == "Ubuntu"
   
   - name:  Add Php support
     apt:
       name: libapache2-mod-php
       state: absent
+    when: ansible_distribution == "Ubuntu"

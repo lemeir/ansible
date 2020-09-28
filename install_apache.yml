@@ -7,13 +7,33 @@
   - name: Update 
     apt:
       update_cache: yes
+    when: ansible_distribution in ["Ubuntu","Dabian"]
 
   - name: Install Apache2 Packadge
     apt:
       name: apache2
       state: latest
+    when: ansible_distribution == "Ubuntu"
   
   - name:  Add Php support
     apt:
       name: libapache2-mod-php
       state: latest
+    when: ansible_distribution == "Ubuntu"
+
+  - name: Update 
+    dnf:
+      update_cache: yes
+    when: ansible_distribution == "CentOS"
+
+  - name: Install Apache2 Packadge
+    dnf:
+      name: httpd
+      state: latest
+    when: ansible_distribution == "CentOS"
+  
+  - name:  Add Php support
+    dnf:
+      name: php
+      state: latest
+    when: ansible_distribution == "CentOS"
