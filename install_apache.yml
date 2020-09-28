@@ -4,36 +4,29 @@
   become: true
   tasks:
 
-  - name: Update 
-    apt:
-      update_cache: yes
-    when: ansible_distribution in ["Ubuntu","Dabian"]
+  #- name: Update 
+  #  apt:
+  #    update_cache: yes
+  #  when: ansible_distribution in ["Ubuntu","Dabian"]
 
-  - name: Install Apache2 Packadge
+  - name: Install Apache2 and php support Packadges
     apt:
-      name: apache2
+      name: 
+        - apache2
+        - libapache2-mod-php
       state: latest
+      update_cache: yes
     when: ansible_distribution == "Ubuntu"
   
-  - name:  Add Php support
-    apt:
-      name: libapache2-mod-php
-      state: latest
-    when: ansible_distribution == "Ubuntu"
+  
 
-  - name: Update 
+  
+  - name: Install Apache and php Packadges
     dnf:
+      name: 
+        - httpd
+        - php
+      state: latest
       update_cache: yes
     when: ansible_distribution == "CentOS"
-
-  - name: Install Apache2 Packadge
-    dnf:
-      name: httpd
-      state: latest
-    when: ansible_distribution == "CentOS"
   
-  - name:  Add Php support
-    dnf:
-      name: php
-      state: latest
-    when: ansible_distribution == "CentOS"

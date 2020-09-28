@@ -1,0 +1,20 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  #- name: Update 
+  #  apt:
+  #    update_cache: yes
+  #  when: ansible_distribution in ["Ubuntu","Dabian"]
+
+  - name: Install Apache2 and php support Packadges
+    package:
+      name: 
+        - "{{ apache_package }}"
+        - "{{ php_package }}"
+      state: latest
+      update_cache: yes
+    # when: ansible_distribution == "Ubuntu"
+   
